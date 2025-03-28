@@ -112,6 +112,64 @@ Use the token received from signin to access protected endpoints:
 - **Headers**: 
   - Authorization: Bearer {your_token}
 
+### 4. Tontine Group Management
+
+All tontine endpoints require authentication. Use the token from signin in the Authorization header.
+
+#### Create Tontine Group
+- **URL**: `POST http://localhost:8080/api/tontine/groups`
+- **Headers**: 
+  - Content-Type: application/json
+  - Authorization: Bearer {your_token}
+- **Body**:
+```json
+{
+    "name": "Family Tontine",
+    "amount": 1000.00,
+    "currency": "EUR",
+    "frequency": "MONTHLY"
+}
+```
+Note: Currency can be either "EUR" or "FCFA", frequency can be "WEEKLY", "MONTHLY", or "YEARLY"
+
+#### Get All Tontine Groups
+- **URL**: `GET http://localhost:8080/api/tontine/groups`
+- **Headers**: 
+  - Authorization: Bearer {your_token}
+- Regular users will see only their groups
+- Admins will see all groups
+
+#### Get Specific Tontine Group
+- **URL**: `GET http://localhost:8080/api/tontine/groups/{id}`
+- **Headers**: 
+  - Authorization: Bearer {your_token}
+- Users can only view their own groups
+- Admins can view any group
+
+#### Update Tontine Group
+- **URL**: `PUT http://localhost:8080/api/tontine/groups/{id}`
+- **Headers**: 
+  - Content-Type: application/json
+  - Authorization: Bearer {your_token}
+- **Body**:
+```json
+{
+    "name": "Updated Family Tontine",
+    "amount": 2000.00,
+    "currency": "FCFA",
+    "frequency": "WEEKLY"
+}
+```
+- Users can only update their own groups
+- Admins can update any group
+
+#### Delete Tontine Group
+- **URL**: `DELETE http://localhost:8080/api/tontine/groups/{id}`
+- **Headers**: 
+  - Authorization: Bearer {your_token}
+- Users can only delete their own groups
+- Admins can delete any group
+
 ## Testing Flow
 
 1. Create a new user using the signup endpoint
@@ -119,6 +177,7 @@ Use the token received from signin to access protected endpoints:
 3. Copy the JWT token from the response
 4. Use the token in the Authorization header to access protected endpoints
 5. Test different endpoints with different user roles
+6. Create and manage tontine groups using the tontine endpoints
 
 ## Common HTTP Status Codes
 
