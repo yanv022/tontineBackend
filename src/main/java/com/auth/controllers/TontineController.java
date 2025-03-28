@@ -60,7 +60,7 @@ public class TontineController {
 
         List<TontineGroup> groups;
         if (authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+                .anyMatch(r -> r.getAuthority().equals("ADMIN"))) {
             groups = tontineGroupRepository.findAll();
         } else {
             groups = tontineGroupRepository.findByCreator(user);
@@ -79,7 +79,7 @@ public class TontineController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         if (!authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN")) &&
+                .anyMatch(r -> r.getAuthority().equals("ADMIN")) &&
                 !group.getCreator().getId().equals(userDetails.getId())) {
             return ResponseEntity.status(403)
                     .body(new MessageResponse("Error: You don't have permission to view this group."));
@@ -99,7 +99,7 @@ public class TontineController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         if (!authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN")) &&
+                .anyMatch(r -> r.getAuthority().equals("ADMIN")) &&
                 !group.getCreator().getId().equals(userDetails.getId())) {
             return ResponseEntity.status(403)
                     .body(new MessageResponse("Error: You don't have permission to update this group."));
@@ -125,7 +125,7 @@ public class TontineController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         if (!authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN")) &&
+                .anyMatch(r -> r.getAuthority().equals("ADMIN")) &&
                 !group.getCreator().getId().equals(userDetails.getId())) {
             return ResponseEntity.status(403)
                     .body(new MessageResponse("Error: You don't have permission to delete this group."));

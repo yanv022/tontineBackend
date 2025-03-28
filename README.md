@@ -81,6 +81,15 @@ For admin registration, use:
     "password": "123456"
 }
 ```
+or 
+
+```json
+{
+    "username": "admin",
+    "password": "123456"
+}
+```
+
 
 The response will contain the JWT token:
 ```json
